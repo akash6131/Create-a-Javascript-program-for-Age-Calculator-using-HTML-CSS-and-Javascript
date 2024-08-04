@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #0e6fb4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #4abcd67a;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 2px black solid;
+    transition:0.3s;
+}
+.container:hover{
+    box-shadow: 0px 0px 60px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="date"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 20px);
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #3221a5;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #2dc4db;
+    color: black;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+</style>
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <form id="age-form">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" required>
+            <button type="submit">Calculate Age</button>
+        </form>
+        <div id="result"></div>
+    </div>
+</body>
+<script>
+    document.getElementById('age-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const dob = new Date(document.getElementById('dob').value);
+    const today = new Date();
+    
+    if (!dob || dob > today) {
+        alert('Please enter a valid date of birth.');
+        return;
+    }
+
+    let age = today.getFullYear() - dob.getFullYear();
+    const monthDiff = today.getMonth() - dob.getMonth();
+    const dayDiff = today.getDate() - dob.getDate();
+
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+        age--;
+    }
+
+    document.getElementById('result').innerText = `You are ${age} years old.`;
+});
+
+</script>
+</html>
